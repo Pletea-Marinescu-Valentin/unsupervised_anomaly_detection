@@ -1,0 +1,5 @@
+Model: ABOD
+Silhouette Score: 0.41
+Dunn Index: 0.05
+Label 0: 13194 instances
+Label 1: 166 instances

@@ -1,0 +1,5 @@
+Model: OCSVM
+Silhouette Score: 0.39
+Dunn Index: 0.02
+Label 0: 13225 instances
+Label 1: 135 instances

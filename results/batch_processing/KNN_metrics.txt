@@ -1,0 +1,5 @@
+Model: KNN
+Silhouette Score: 0.49
+Dunn Index: 0.10
+Label 0: 13226 instances
+Label 1: 134 instances

@@ -1,0 +1,5 @@
+Model: LODA
+Silhouette Score: 0.50
+Dunn Index: 0.12
+Label 0: 13226 instances
+Label 1: 134 instances

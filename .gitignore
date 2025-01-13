@@ -1,0 +1,13 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# Data files
+*.csv
+
+# Logs
+*.log
