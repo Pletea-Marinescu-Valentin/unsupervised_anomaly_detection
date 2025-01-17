@@ -6,32 +6,21 @@ This project implements unsupervised anomaly detection using machine learning mo
 
 🏗️ Project Structure
 
+``` plaintext
 📂 unsupervised_anomaly_detection
-
 ├── 📁 data/                 # Dataset folder
-
 │   └── cancer_issue.csv     # Input dataset
-
 ├── 📁 preprocessing/        # Preprocessing scripts
-
 ├── 📁 models/               # Model implementations
-
 ├── 📁 evaluation/           # Metrics and visualization scripts
-
 ├── 📁 scripts/              # Batch processing and report generation
-
 │   ├── batch_processing.py  # Main script for model training and evaluation
-
 │   ├── report_generator.py  # Generates summary report
-
 ├── 📁 results/              # Output predictions and reports
-
 ├── main.py                  # Main entry point for the project
-
 ├── requirements.txt         # Required libraries
-
 └── README.md                # Project documentation
-
+```
 
 
 ## 📥 Setup Instructions
