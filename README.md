@@ -46,6 +46,8 @@ python -m main
    - LODA (Lightweight Online Detector of Anomalies)
    - ABOD (Angle-Based Outlier Detection)
    - OCSVM (One-Class Support Vector Machine)
+- Utilities:
+   - Save and load predictions to/from CSV files.
 - Evaluation:
    - Metrics: Silhouette Score and Dunn Index.
    - Summary report generation.
