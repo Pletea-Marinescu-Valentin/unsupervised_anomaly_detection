@@ -7,11 +7,16 @@ def parse_metrics(file_path):
     Parse metrics from a text file and return as a dictionary.
     """
     metrics = {}
-    with open(file_path, "r") as f:
-        for line in f:
-            if ":" in line:
-                key, value = line.split(":", 1)
-                metrics[key.strip()] = value.strip()
+    try:
+        with open(file_path, "r") as f:
+            for line in f:
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    metrics[key.strip()] = value.strip()
+    except FileNotFoundError:
+        print(f"Metrics file not found: {file_path}")
+    except Exception as e:
+        print(f"Error reading metrics file {file_path}: {e}")
     return metrics
 
 def generate_summary_report(results_dir, output_path="results/summary_report.md"):
