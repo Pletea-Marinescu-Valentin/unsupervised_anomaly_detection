@@ -58,66 +58,72 @@ def encode_categorical_columns(df):
     
     return df
 
-def process_dataset():
+def process_dataset(dataset_path="data/cancer_issue.csv"):
     """
     Process the dataset for unsupervised anomaly detection.
     """
-    # Step 1: Load dataset
-    dataset_path = "data/cancer_issue.csv"
     print(f"Processing dataset: {dataset_path}")
-    df = load_dataset(dataset_path)
-    print("Dataset loaded successfully.")
-    print(df.head())
+    try:
+        df = load_dataset(dataset_path)
+        print("Dataset loaded successfully.")
+        print(df.head())
 
-    # Step 2: Remove missing values
-    df = remove_missing_values(df)
-    print(f"Removed missing values. Remaining rows: {len(df)}")
+        # Step 2: Remove missing values
+        df = remove_missing_values(df)
+        print(f"Removed missing values. Remaining rows: {len(df)}")
 
-    # Step 3: Feature Engineering
-    df = feature_engineering(df)
-    print("Feature engineering completed.")
+        # Step 3: Feature Engineering
+        df = feature_engineering(df)
+        print("Feature engineering completed.")
 
-    # Step 4: Encode categorical columns
-    df = encode_categorical_columns(df)
-    print("Categorical columns encoded.")
+        # Step 4: Encode categorical columns
+        df = encode_categorical_columns(df)
+        print("Categorical columns encoded.")
 
-    # Step 5: Select numeric columns for scaling
-    numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns
-    X = scale_data(df, numeric_columns)
-    print("Data scaled successfully.")
+        # Step 5: Select numeric columns for scaling
+        numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns
+        X = scale_data(df, numeric_columns)
+        print("Data scaled successfully.")
 
-    # Step 6: Apply PCA
-    X = apply_pca(X, n_components=10)
+        # Step 6: Apply PCA
+        X = apply_pca(X, n_components=10)
 
-    # Step 7: Prepare results directory
-    results_dir = "results"
-    os.makedirs(results_dir, exist_ok=True)
+        # Step 7: Prepare results directory
+        results_dir = "results"
+        os.makedirs(results_dir, exist_ok=True)
 
-    # Step 8: Train and evaluate models
-    models = {
-        "KNN": train_knn,
-        "OCSVM": train_ocsvm,
-        "ABOD": train_abod,
-        "LODA": train_loda
-    }
+        # Step 8: Train and evaluate models
+        models = {
+            "KNN": train_knn,
+            "OCSVM": train_ocsvm,
+            "ABOD": train_abod,
+            "LODA": train_loda
+        }
 
-    predictions = {}
-    for model_name, train_function in models.items():
-        print(f"Training {model_name} model...")
-        y_pred = train_function(X, contamination=0.01)  # Adjust contamination
-        print(f"Predictions: {y_pred}, Length: {len(y_pred)}")  # Debugging
-        predictions[model_name] = y_pred
+        predictions = {}
+        for model_name, train_function in models.items():
+            print(f"Training {model_name} model...")
+            y_pred = train_function(X, contamination=0.01)  # Adjust contamination
+            print(f"Predictions: {y_pred}, Length: {len(y_pred)}")  # Debugging
+            predictions[model_name] = y_pred
 
-        # Save predictions
-        output_path = os.path.join(results_dir, f"{model_name}_predictions.csv")
-        pd.DataFrame({'Prediction': y_pred}).to_csv(output_path, index=False)
-        print(f"{model_name} predictions saved to {output_path}")
+            # Save predictions
+            output_path = os.path.join(results_dir, f"{model_name}_predictions.csv")
+            pd.DataFrame({'Prediction': y_pred}).to_csv(output_path, index=False)
+            print(f"{model_name} predictions saved to {output_path}")
 
-        # Evaluate model
-        evaluate_model(X, y_pred, model_name)
+            # Evaluate model
+            evaluate_model(X, y_pred, model_name)
 
-        # Visualize anomalies
-        visualize_anomalies(df, model_name, y_pred)
+            # Visualize anomalies
+            visualize_anomalies(df, model_name, y_pred)
+
+    except FileNotFoundError:
+        print(f"Dataset not found: {dataset_path}")
+        return
+    except Exception as e:
+        print(f"Error processing dataset: {e}")
+        return
 
 if __name__ == "__main__":
     process_dataset()
