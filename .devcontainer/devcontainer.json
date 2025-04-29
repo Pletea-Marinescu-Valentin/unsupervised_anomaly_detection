@@ -1,0 +1,15 @@
+{
+	"name": "Python Dev Container",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"settings": {
+		"python.defaultInterpreterPath": "/usr/local/bin/python"
+	},
+	"extensions": [
+		"ms-python.python",
+		"ms-python.vscode-pylance"
+	],
+	"postCreateCommand": "pip install -r /workspaces/unsupervised_anomaly_detection/requirements.txt",
+	"remoteUser": "vscode"
+}
